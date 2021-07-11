@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 
 namespace BeeHiveManagement
 {
@@ -42,7 +39,6 @@ namespace BeeHiveManagement
 
         public void AddWorker(Bee bee)
         {
-            Debug.WriteLine("running addworker " + unassignedWorkers);            
             if(unassignedWorkers >= 1)
             {
                 unassignedWorkers--;
@@ -54,21 +50,17 @@ namespace BeeHiveManagement
         }
 
         public void AssignBee(string job)
-        {
-            
+        {            
             switch (job)
             {
                 case "Egg Care":
-                    AddWorker(new EggCare(this));
-                    Debug.WriteLine(job);
+                    AddWorker(new EggCare(this));                    
                     break;
                 case "Honey Manufacturer":
-                    AddWorker(new HoneyManufacturer());
-                    Debug.WriteLine(job);
+                    AddWorker(new HoneyManufacturer());                    
                     break;
                 case "Nectar Collector":
-                    AddWorker(new NectarCollector());
-                    Debug.WriteLine(job);
+                    AddWorker(new NectarCollector());                    
                     break;
             }
             
