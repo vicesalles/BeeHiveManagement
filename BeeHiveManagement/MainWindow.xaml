@@ -6,7 +6,12 @@
         xmlns:local="clr-namespace:BeeHiveManagement"
         mc:Ignorable="d"
         Title="Bee Hive Manager" Height="325" Width="625">
-    <Grid>
+    
+    <Window.Resources>
+        <local:Queen x:Key="queen"/>
+    </Window.Resources>
+    
+    <Grid DataContext="{StaticResource queen}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="4*"/>
@@ -18,7 +23,7 @@
         </Grid.ColumnDefinitions>
         <Label x:Name="label" Content="Job Assignments" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="18"/>
         <Label x:Name="label1" Content="Queen's Report" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="18"/>
-        <TextBox x:Name="statusReport" Grid.Column="1" Grid.RowSpan="2" Margin="20" Grid.Row="1" IsReadOnly="True" />
+        <TextBox x:Name="statusReport" Grid.Column="1" Grid.RowSpan="2" Margin="20" Grid.Row="1" IsReadOnly="True" Text="{Binding StatusReport, Mode=OneWay}" />
         <StackPanel Grid.Row="1" VerticalAlignment="Top" Margin="20">
             <ComboBox x:Name="jobSelector" FontSize="18" SelectedIndex="0" Margin="0,0,0,20">
                 <ListBoxItem Content="Nectar Collector"/>

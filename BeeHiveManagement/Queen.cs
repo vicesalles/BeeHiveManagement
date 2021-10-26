@@ -1,8 +1,12 @@
 ﻿using System;
 
+
 namespace BeeHiveManagement
 {
-    class Queen : Bee
+
+    using System.ComponentModel;
+
+    class Queen : Bee, INotifyPropertyChanged
     {
 
         const float EGGS_PER_SHIFT = 0.45f;
@@ -13,6 +17,8 @@ namespace BeeHiveManagement
         private float eggs = 0;
         private float unassignedWorkers = 3;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public override float CostPerShift { get => 2.15f; }
         public string StatusReport { get; private set; }
 
@@ -22,6 +28,11 @@ namespace BeeHiveManagement
             AssignBee("Honey Manufacturer");
             AssignBee("Nectar Collector");           
 
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         protected override void DoJob()
@@ -72,6 +83,7 @@ namespace BeeHiveManagement
                 $"Egg count:{eggs:0.0}\n \nUnassigned wokers: {unassignedWorkers:0.0}\n" +
                 $"\n{WorkerStatus("Nectar Collector")}\n{WorkerStatus("Honey Manufacturer")}\n" +
                 $"{ WorkerStatus("Egg Care")}\n \nTOTAL WORKERS: {workers.Length}\n";
+            OnPropertyChanged("StatusReport");
         }
 
         private string WorkerStatus(string job)
